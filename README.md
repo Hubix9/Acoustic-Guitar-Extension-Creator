@@ -5,7 +5,7 @@ Tool created to let users of acoustic guitar mod easily add songs
 
 ## How to use
 
-Warning! Tool's song conversion process can be very resource demanding 
+Warning! Tool's song conversion process can be very resource demanding, I advise to close unneeded programs for the process
 
 1. Extract Acoustic Guitar Extension Creator folder from downloaded zip
 2. Enter that folder

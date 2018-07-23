@@ -12,7 +12,7 @@ Warning! Tool's song conversion process can be very resource demanding, I advise
 3. Put your songs in the songs folder
 4. Run start.bat script
 5. follow instructions given by the program on screen
-6. After the process has finished you will be able to find your mod in the Acoustic Guitar Extension Creator folder
+6. After the process has finished you will be able to find your mod folder in the Acoustic Guitar Extension Creator folder
 7. Load created mod and the Acoustic Guitar mod in Arma 3
 8. Enjoy!
 

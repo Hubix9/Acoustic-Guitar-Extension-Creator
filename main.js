@@ -10,6 +10,8 @@ const copy = require('copy');
 const { execFile } = require('child_process');
 const { exec } = require('child_process');
 const rimraf = require('rimraf');
+const gulp = require('gulp');
+const pbo = require('gulp-armapbo');
 //ffmpeg setup
 ffmpeg.setFfmpegPath("./data/ffmpeg.exe");
 //promptsetup
@@ -43,7 +45,7 @@ var configcpp = '';
 //creating addon
 console.log('======Welcome to Acoustic Guitar Extension Creator======')
 sleep(2000)
-console.log('Please enter name for your extension')
+console.log('Please enter name for your extension (make sure it\'s not including any spaces!)')
 prompt.start();
 prompt.get(['name'],function (err,result) {
 	mainfoldername = result.name;
@@ -216,18 +218,22 @@ prompt.get(['name'],function (err,result) {
 										fs.copyFile('./data/w_guitar_ca.paa','./@' + mainfoldername + '/w_guitar_ca.paa',function(err){});
 										fs.writeFile('./@' + mainfoldername + '/' + '/Addons/' + mainfoldername + '/$PBOPREFIX$.txt',mainfoldername,function(err){});
 										fs.writeFile('./' + '@' + mainfoldername + '/Addons/' + '/' + mainfoldername + '/' + 'config.cpp',configcpp,function(err) {
+											console.log("Creating PBO")
 											//console.log('config.cpp created');
 											//console.log('./data/a3lib.exe')
 											//console.log('./@' + mainfoldername + '/' + 'Addons' + '/' + mainfoldername + '/')
-											fs.copyFile('./data/a3lib.exe','./@' + mainfoldername + '/' + 'Addons' + '/' + mainfoldername + '/' + 'a3lib.exe', function(err) {
+											//fs.copyFile('./data/a3lib.exe','./@' + mainfoldername + '/' + 'Addons' + '/' + mainfoldername + '/' + 'a3lib.exe', function(err) {
 												//console.log('copied a3lib.exe');
-												exec('a3lib.exe pbo -cf ' + mainfoldername + '.pbo' + ' config.cpp songs $PBOPREFIX$.txt',{cwd: __dirname + '\\@' + mainfoldername + '\\' + 'Addons' + '\\' + mainfoldername},function(error,stdout,stderr) {
+												//exec('a3lib.exe pbo -cf ' + mainfoldername + '.pbo' + ' config.cpp songs $PBOPREFIX$.txt',{cwd: __dirname + '\\@' + mainfoldername + '\\' + 'Addons' + '\\' + mainfoldername},function(error,stdout,stderr) {
 													//console.log(stdout);
 													//console.log(stderr);
 													//console.log(error);
-													fs.copyFile('./@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '/' + mainfoldername + '.pbo','./@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '.pbo',function(err){
+													//fs.copyFile('./@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '/' + mainfoldername + '.pbo','./@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '.pbo',function(err){
 														//console.log('./@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '/' + mainfoldername + '.pbo')
 														//console.log('moved .pbo to ' + './@' + mainfoldername + '/' + 'Addons/' + mainfoldername + '.pbo')
+											pboname = mainfoldername + ".pbo";
+											gulp.src('./@' + mainfoldername + '/Addons/' + mainfoldername + '/**/*').pipe(pbo.pack({fileName: pboname})).pipe(gulp.dest('./@' + mainfoldername + '/Addons/')).on('end', function(){
+											
 														rimraf('./@' + mainfoldername + '/' + 'Addons/' + mainfoldername,function(err) {
 															console.log('cleaned temporary files')
 															//console.log('./@' + mainfoldername + '/' + 'Addons/' + mainfoldername)
@@ -237,10 +243,8 @@ prompt.get(['name'],function (err,result) {
 															console.log('window will close automatically in 10 seconds')
 															sleep(10000);
 															process.exit()
-														});
-													});
-												});	
-											});
+															})});
+															
 										});
 									};
 								};

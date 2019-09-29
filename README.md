@@ -20,4 +20,4 @@ Warning! Tool's song conversion process can be very resource demanding, I advise
 ## Credits
 **[FFmpeg](https://www.ffmpeg.org/)** - used to convert songs to .ogg format and to get informations about them
 
-**[a3lib.py](https://github.com/4d4a5852/a3lib.py)** - used to pack mod files into .pbo file
+**[Gulp Arma Pbo plugin](https://github.com/winseros/gulp-armapbo-plugin)** - used to pack mod files into .pbo file

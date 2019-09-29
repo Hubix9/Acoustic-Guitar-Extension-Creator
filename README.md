@@ -17,6 +17,10 @@ Warning! Tool's song conversion process can be very resource demanding, I advise
 8. Enjoy!
 
 
+## Known Issues
+If you encounter an issue with .pbo file not being created you will have to download the "Dev" realase of this tool and package the .pbo yourself using for example **[PBO Manager](http://www.armaholic.com/page.php?id=16369)**
+
+
 ## Credits
 **[FFmpeg](https://www.ffmpeg.org/)** - used to convert songs to .ogg format and to get informations about them
 

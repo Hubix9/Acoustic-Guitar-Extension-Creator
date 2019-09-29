@@ -1,7 +1,7 @@
 # Acoustic-Guitar-Extension-Creator
 Tool created to let users of acoustic guitar mod easily add songs
 
-###### This tool uses an .exe version of [a3lib.py](https://github.com/4d4a5852/a3lib.py) created with pyinstaller you can get it [here](https://github.com/Hubix9/a3lib.py/releases)
+
 
 ## How to use
 

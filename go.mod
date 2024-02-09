@@ -1,4 +1,4 @@
-module Pocket_Music_Player_Extension_CreatorV3
+module Music_Player_Extension_Creator
 
 go 1.18
 

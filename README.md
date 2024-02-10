@@ -5,7 +5,7 @@ Tool created to let users of acoustic guitar and pocket music player mods easily
 
 1. Extract Music Extension Creator folder from downloaded .zip
 2. Enter that folder
-3. Put your songs in the songs folder
+3. Put your songs in the songs folder (.mp3 format is recommended)
 4. Run Music_extension_creator.exe file
 5. Enter or modify information in appropriate fields, you only need to edit extension name, description and author, rest you can leave on default values
 6. Press "Create extension" button in the upper right corner
@@ -16,7 +16,8 @@ Tool created to let users of acoustic guitar and pocket music player mods easily
 
 ## Known Issues
 * If you encounter an issue with extension creation, you can fall back to **[Old version](https://github.com/Hubix9/Acoustic-Guitar-Extension-Creator/tree/master)** of this tool
-* Make sure that filenames of songs don't contain special characters. Underscores, spaces, numbers and letters are ok, though it's best to keep them simple like: MySong1.mp3 
+* Make sure that filenames of songs don't contain special characters. Underscores, spaces, numbers and letters are ok, though it's best to keep them simple like: MySong1.mp3
+* Tool will crash if songs folder contains .txt file or has no song files inside of it
 
 ## Credits
 **[FFmpeg](https://www.ffmpeg.org/)** - used to convert songs to .ogg format and to get informations about them

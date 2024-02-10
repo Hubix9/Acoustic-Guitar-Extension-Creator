@@ -14,8 +14,12 @@ func generateConfigCpp() string {
 	}
 
 	amountOfSongs := len(songs)
+	fmt.Print("Amount of songs: ", amountOfSongs, "\n")
 	songsPerGroup := 5
 	amountOfGroups := amountOfSongs / songsPerGroup
+	if amountOfSongs%songsPerGroup != 0 {
+		amountOfGroups++
+	}
 	songGroups := make([]SongGroup, amountOfGroups)
 	for i, _ := range songGroups {
 		songGroups[i] = SongGroup{}

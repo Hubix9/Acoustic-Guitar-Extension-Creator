@@ -1,6 +1,10 @@
 # Music-Extension-Creator
 Tool created to let users of acoustic guitar and pocket music player mods easily add songs
 
+## How to download
+In order to download the tool, head to the *Releases* tab:
+https://github.com/Hubix9/Acoustic-Guitar-Extension-Creator/releases
+
 ## How to use
 
 1. Extract Music Extension Creator folder from downloaded .zip

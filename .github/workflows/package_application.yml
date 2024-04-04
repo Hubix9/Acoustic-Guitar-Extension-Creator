@@ -1,0 +1,75 @@
+name: Application packaging
+
+on: 
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: "Commit hash from which release should be built"
+        required: false 
+        type: string
+      only_artifact:
+        description: "Only build an artifact, do not create a release"
+        required: true
+        type: boolean
+
+jobs:
+  package_application:
+    runs-on: windows-2022
+    steps:
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: '1.18.1'
+    - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
+      with:
+        path: 'agec'
+        fetch-depth: 0
+    - name: Checkout specific commit
+      if: ${{ inputs.commit_hash != '' }}
+      run: |
+        cd agec
+        git checkout ${{ inputs.commit_hash }}
+        cd ..
+    - uses: benjlevesque/short-sha@36eb8c530990ceac5ddf3c0bc32d02c677ae9706 #v2.2
+      id: short-sha
+    - uses: josStorer/get-current-time@5979d2f4455ed5df566aa6df67cedd77d17afaa9 #v2.1.1
+      id: current-time
+      with:
+        format: YYMMDD-HHMMSS
+    - name: Download FFmpeg
+      run: curl -o ffmpeg.zip https://github.com/GyanD/codexffmpeg/releases/download/6.1.1/ffmpeg-6.1.1-essentials_build.zip
+    - name: Unpack FFmpeg
+      run: Expand-Archive -Path ffmpeg.zip -DestinationPath ffmpeg_unpacked
+    - name: Create directory for packaging
+      run: mkdir build
+    - name: Build application
+      run: |
+        cd agec
+        go mod tidy
+        go build .
+        cd ..
+    - name: Package
+      run: |
+        cp agec\main.exe build\Music_extension_creator.exe
+        mkdir build\data
+        cp agec\data\w_guitar_ca.paa build\data\w_guitar_ca.paa
+        cp ffmpeg_unpacked\ffmpeg-6.1.1-essentials_build\bin\ffprobe.exe build\data\ffprobe.exe
+        cp ffmpeg_unpacked\ffmpeg-6.1.1-essentials_build\bin\ffmpeg.exe build\data\ffmpeg.exe
+        mkdir build\songs
+        New-Item "build\songs\put your songs here and delete this file.txt" -type file
+    - name: Package application into a zip
+      run: "[IO.Compression.ZipFile]::CreateFromDirectory(\"$PWD\\build\",\"$PWD\\Music_extension_creator.zip\",\"Fastest\",$true)"
+    - uses: ncipollo/release-action@6c75be85e571768fa31b40abf38de58ba0397db5 #v1.13.0
+      if: ${{ inputs.only_artifact == false }}
+      with:
+        artifacts: "Music_extension_creator.zip"
+        tag: "CD-${{ steps.current-time.outputs.formattedTime }}-${{ steps.short-sha.outputs.sha }}"
+        prerelease: true
+        name: "CD-${{ steps.current-time.outputs.formattedTime }}-${{ steps.short-sha.outputs.sha }}"
+        generateReleaseNotes: true
+    - uses: actions/upload-artifact@v4
+      if: ${{ inputs.only_artifact == true }}
+      with:
+        name: "CD-${{ steps.current-time.outputs.formattedTime }}-${{ steps.short-sha.outputs.sha }}"
+        path: "Music_extension_creator.zip"
+        retention-days: 1

@@ -46,7 +46,7 @@ jobs:
     - name: Build application
       run: |
         cd agec
-        go build .
+        go build -o main.exe .
         cd ..
     - name: Package
       run: |

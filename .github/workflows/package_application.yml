@@ -46,7 +46,6 @@ jobs:
     - name: Build application
       run: |
         cd agec
-        go mod tidy
         go build main.go
         cd ..
     - name: Package

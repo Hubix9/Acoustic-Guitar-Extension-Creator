@@ -37,7 +37,7 @@ jobs:
       with:
         format: YYMMDD-HHMMSS
     - name: Download FFmpeg
-      run: curl https://github.com/GyanD/codexffmpeg/releases/download/6.1.1/ffmpeg-6.1.1-essentials_build.zip -o ffmpeg.zip
+      run: curl https://www.gyan.dev/ffmpeg/builds/ffmpeg-release-essentials.zip -o ffmpeg.zip
     - name: Unpack FFmpeg
       run: Expand-Archive -Path ffmpeg.zip -DestinationPath ffmpeg_unpacked
     - name: Create directory for packaging

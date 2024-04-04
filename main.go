@@ -309,10 +309,10 @@ func main() {
 	}
 	generationOptions := widget.NewRadioGroup([]string{"Generate Guitar config", "Generate Pocket Music Player config", "Generate both configs"},
 		func(value string) {
-			if value == "Generate guitar config" {
+			if value == "Generate Guitar config" {
 				extensiondata.GenerateGuitarCfg = true
 				extensiondata.GeneratePocketMusicPlayerCfg = false
-			} else if value == "Generate pocket music player config" {
+			} else if value == "Generate Pocket Music Player config" {
 				extensiondata.GenerateGuitarCfg = false
 				extensiondata.GeneratePocketMusicPlayerCfg = true
 			} else {

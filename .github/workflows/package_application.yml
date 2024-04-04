@@ -20,6 +20,7 @@ jobs:
       uses: actions/setup-go@v4
       with:
         go-version: '1.18.1'
+        cache-dependency-path: go.sum
     - uses: actions/checkout@b4ffde65f46336ab88eb53be808477a3936bae11 #v4.1.1
       with:
         path: 'agec'
@@ -46,7 +47,7 @@ jobs:
       run: |
         cd agec
         go mod tidy
-        go build .
+        go build main.go
         cd ..
     - name: Package
       run: |
